@@ -10,8 +10,6 @@ const verifyToken = async (token) => {
 
 const requireAuth = (allowedRoles = []) => {
     return (handler) => async (event, context) => {
-        console.log("requireAuth invoked", event.headers);
-        console.log(await getJwtSecret());
         try {
             const authHeader = event.headers?.Authorization || event.headers?.authorization || "";
             const token = authHeader.startsWith("Bearer ") ? authHeader.slice(7) : null;
