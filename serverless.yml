@@ -10,7 +10,7 @@ provider:
   environment:
     POSTS_TABLE: ${self:service}-posts-${self:provider.stage}
     USERS_TABLE: ${self:service}-users-${self:provider.stage}
-    MEDIA_BUCKET: ${self:service}-media-${self:provider.stage}
+    MEDIA_BUCKET: ${self:service}-media-${self:provider.stage}-${opt:region, self:provider.region}-${aws:accountId}
     AWS_NODEJS_CONNECTION_REUSE_ENABLED: '1'
     AWS_ACCOUNT_ID: ${aws:accountId}
     JWT_SECRET_ARN: !Ref JwtSecret
@@ -30,7 +30,6 @@ provider:
         - arn:aws:dynamodb:${self:provider.region}:*:table/${self:provider.environment.USERS_TABLE}
         - arn:aws:dynamodb:${self:provider.region}:*:table/${self:provider.environment.USERS_TABLE}/index/EmailIndex
 
-    # Auto-scaling API
     - Effect: Allow
       Action:
         - application-autoscaling:*
@@ -44,7 +43,6 @@ provider:
         - dynamodb:UpdateTable
       Resource: "*"
 
-    # S3 permissions
     - Effect: "Allow"
       Action:
         - s3:PutObject
@@ -72,9 +70,6 @@ provider:
       maxRequestsPerSecond: 200
       maxConcurrentRequests: 500
 
-# ---------------------
-# LAMBDA AUTOSCALING
-# ---------------------
 functions:
   createPost:
     handler: src/handlers/createPost.handler
@@ -148,10 +143,30 @@ functions:
 
 resources:
   Resources:
+    LambdaExecutionRole:
+      Type: AWS::IAM::Role
+      Properties:
+        AssumeRolePolicyDocument:
+          Version: "2012-10-17"
+          Statement:
+            - Effect: Allow
+              Principal:
+                Service:
+                  - lambda.amazonaws.com
+              Action:
+                - sts:AssumeRole
+        Policies:
+          - PolicyName: LambdaPolicy
+            PolicyDocument:
+              Version: "2012-10-17"
+              Statement:
+                - Effect: Allow
+                  Action:
+                    - dynamodb:*
+                    - s3:*
+                    - secretsmanager:GetSecretValue
+                  Resource: "*"
 
-    # ---------------------
-    # DynamoDB Tables
-    # ---------------------
     PostsTable:
       Type: AWS::DynamoDB::Table
       Properties:
@@ -203,7 +218,7 @@ resources:
     MediaBucket:
       Type: AWS::S3::Bucket
       Properties:
-        BucketName: ${self:service}-media-${self:provider.stage}
+        BucketName: ${self:provider.environment.MEDIA_BUCKET}
         PublicAccessBlockConfiguration:
           BlockPublicAcls: false
           BlockPublicPolicy: false

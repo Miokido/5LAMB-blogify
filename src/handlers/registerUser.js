@@ -1,4 +1,3 @@
-// src/handlers/registerUser.js
 const { ddb } = require("../lib/dynamo.js");
 const { PutCommand, QueryCommand } = require("@aws-sdk/lib-dynamodb");
 const bcrypt = require("bcryptjs");
@@ -13,7 +12,6 @@ module.exports.handler = async (event) => {
             return { statusCode: 400, body: JSON.stringify({ error: "Email and password required" }) };
         }
 
-        // Vérifier si l'utilisateur existe déjà (EmailIndex)
         const queryRes = await ddb.send(new QueryCommand({
             TableName: process.env.USERS_TABLE,
             IndexName: "EmailIndex",
@@ -32,7 +30,7 @@ module.exports.handler = async (event) => {
             userId,
             email,
             passwordHash: hashedPassword,
-            role: role || "guest", // rôle par défaut
+            role: role || "guest",
             createdAt: new Date().toISOString(),
             updatedAt: new Date().toISOString()
         };

@@ -1,4 +1,3 @@
-// src/handlers/deletePost.js
 const { ddb } = require("../lib/dynamo.js");
 const { GetCommand, DeleteCommand } = require("@aws-sdk/lib-dynamodb");
 const { requireAuth } = require("../lib/auth");

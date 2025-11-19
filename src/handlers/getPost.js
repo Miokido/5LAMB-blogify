@@ -1,4 +1,3 @@
-// src/handlers/getPost.js
 const { ddb } = require("../lib/dynamo.js");
 const { GetCommand } = require("@aws-sdk/lib-dynamodb");
 

@@ -1,4 +1,3 @@
-// src/handlers/listPosts.js
 const { ddb } = require("../lib/dynamo.js");
 const { ScanCommand } = require("@aws-sdk/lib-dynamodb");
 

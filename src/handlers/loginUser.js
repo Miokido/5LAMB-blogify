@@ -1,4 +1,3 @@
-// src/handlers/loginUser.js
 const { ddb } = require("../lib/dynamo.js");
 const { QueryCommand } = require("@aws-sdk/lib-dynamodb");
 const bcrypt = require("bcryptjs");
@@ -35,7 +34,6 @@ module.exports.handler = async (event) => {
             };
         }
 
-        // ➤ Retrieve user by email
         const queryRes = await ddb.send(new QueryCommand({
             TableName: process.env.USERS_TABLE,
             IndexName: "EmailIndex",
@@ -66,11 +64,7 @@ module.exports.handler = async (event) => {
             role: user.role
         };
 
-        // ➤ Load secret from Secrets Manager
         const secret = await loadJwtSecret();
-
-        // ➤ Generate JWT
-        console.log("[loginUser] secret length:", secret.length, "sha256:", require('crypto').createHash('sha256').update(secret).digest('hex'));
         const token = jwt.sign(payload, secret, { expiresIn: "7d" });
 
         return {

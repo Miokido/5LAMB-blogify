@@ -19,14 +19,14 @@ Blogify est une API de blog serverless basée sur AWS (Lambda, DynamoDB, S3, Cog
 1. **Cloner le projet :**
 
 ```bash
-git clone <repo-url>
+git clone https://github.com/Miokido/5LAMB-blogify.git
 cd blogify
 ```
 
 2. **Installer les dépendances :**
 
 ```bash
-npm i
+npm install
 ```
 3. **Installer Serverless Framework (si non installé) :**
 ```bash
@@ -36,14 +36,18 @@ npm install -g serverless
 ## Déploiement
 1. **Configurer vos identifiants AWS :**
 
+Pensez à bien créer un utilisateur IAM qui aura les droits pour faire ce déploiement.
+Nous recommandons de créer un rôle "blogify-admin" qui aura l'unique autorisation "AdministratorAccess", suffisante pour nos opérations. Créez ensuite un utilisateur ayant ce rôle, et créez lui une clé d'accès pour CLI, en pensant à noter la clé d'accès ainsi que son secret.
+
 ```bash
 aws configure
 ```
 2. **Déployer le projet :**
 
 ```bash
-serverless deploy --stage develop --region eu-west-1
+serverless deploy
 ```
+Vous pouvez utiliser les options --stage et --region pour modifier ces paramètres (par défaut ils sont à develop et eu-west-1)
 
 3. **Variables d’environnement :**
 

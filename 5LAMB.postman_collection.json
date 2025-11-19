@@ -1,0 +1,383 @@
+{
+	"info": {
+		"_postman_id": "dd16f7da-254d-4d18-9ecd-33cf5dc2e025",
+		"name": "5LAMB",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "40134861"
+	},
+	"item": [
+		{
+			"name": "registerUser",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"baptiste.cheruel@gmail.com\",\r\n    \"password\": \"Test123!\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/auth/register",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"auth",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "loginUser",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"baptiste.cheruel@gmail.com\",\r\n    \"password\": \"Test123!\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/auth/login",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "createPost",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{jwtToken}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"title\": \"Mon post avec image\",\r\n  \"body\": \"Contenu du post\",\r\n  \"status\": \"published\",\r\n  \"media\": [\r\n    {\r\n      \"type\": \"image\",\r\n      \"key\": \"uploads/image.png\"\r\n    }\r\n  ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/posts",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"posts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "updatePost",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIyMDgyNDIzMi1mNjc3LTQ0ODUtODBjZS0xOTU4OTU3NDE1M2EiLCJlbWFpbCI6ImJhcHRpc3RlLmNoZXJ1ZWxAZ21haWwuY29tIiwicm9sZSI6ImVkaXRvciIsImlhdCI6MTc2MzU0MTcwNiwiZXhwIjoxNzY0MTQ2NTA2fQ.ZjoOyQQf3IPdVKpn-GDW0NXn24js46DwrSGZIZkNlPY",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"title\": \"Mon post avec image modifié\",\r\n  \"body\": \"Contenu du post modifié\",\r\n  \"status\": \"published\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/posts/d0420bc2-c6b1-47da-aeba-a43318b47edf",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"posts",
+						"d0420bc2-c6b1-47da-aeba-a43318b47edf"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getPost",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIyMDgyNDIzMi1mNjc3LTQ0ODUtODBjZS0xOTU4OTU3NDE1M2EiLCJlbWFpbCI6ImJhcHRpc3RlLmNoZXJ1ZWxAZ21haWwuY29tIiwicm9sZSI6ImVkaXRvciIsImlhdCI6MTc2MzU0MTcwNiwiZXhwIjoxNzY0MTQ2NTA2fQ.ZjoOyQQf3IPdVKpn-GDW0NXn24js46DwrSGZIZkNlPY",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"title\": \"Mon post avec image modifié\",\r\n  \"body\": \"Contenu du post\",\r\n  \"status\": \"published\",\r\n  \"media\": [\r\n    {\r\n      \"type\": \"image\",\r\n      \"key\": \"uploads/xxx.png\"\r\n    }\r\n  ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/posts/966233ca-d804-463f-8b73-9baa98d3f748",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"posts",
+						"966233ca-d804-463f-8b73-9baa98d3f748"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deletePost",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIyMDgyNDIzMi1mNjc3LTQ0ODUtODBjZS0xOTU4OTU3NDE1M2EiLCJlbWFpbCI6ImJhcHRpc3RlLmNoZXJ1ZWxAZ21haWwuY29tIiwicm9sZSI6ImVkaXRvciIsImlhdCI6MTc2MzU0MTcwNiwiZXhwIjoxNzY0MTQ2NTA2fQ.ZjoOyQQf3IPdVKpn-GDW0NXn24js46DwrSGZIZkNlPY",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"title\": \"Mon post avec image modifié\",\r\n  \"body\": \"Contenu du post\",\r\n  \"status\": \"published\",\r\n  \"media\": [\r\n    {\r\n      \"type\": \"image\",\r\n      \"key\": \"uploads/xxx.png\"\r\n    }\r\n  ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/posts/966233ca-d804-463f-8b73-9baa98d3f748",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"posts",
+						"966233ca-d804-463f-8b73-9baa98d3f748"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "listPost",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{jwtToken}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"title\": \"Mon post avec image modifié\",\r\n  \"body\": \"Contenu du post\",\r\n  \"status\": \"published\",\r\n  \"media\": [\r\n    {\r\n      \"type\": \"image\",\r\n      \"key\": \"uploads/xxx.png\"\r\n    }\r\n  ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/posts",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"posts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "generatePresignedUrl",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIyMDgyNDIzMi1mNjc3LTQ0ODUtODBjZS0xOTU4OTU3NDE1M2EiLCJlbWFpbCI6ImJhcHRpc3RlLmNoZXJ1ZWxAZ21haWwuY29tIiwicm9sZSI6ImVkaXRvciIsImlhdCI6MTc2MzU0MTcwNiwiZXhwIjoxNzY0MTQ2NTA2fQ.ZjoOyQQf3IPdVKpn-GDW0NXn24js46DwrSGZIZkNlPY",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"filename\": \"image.png\",\r\n    \"contentType\": \"image/png\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/media/presign",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"media",
+						"presign"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Upload Media",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"user-agent": true,
+					"accept": true,
+					"accept-encoding": true,
+					"connection": true
+				}
+			},
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "file",
+					"file": {
+						"src": "/C:/Users/bapti/Downloads/image0.png"
+					}
+				},
+				"url": {
+					"raw": "https://blogify-media-develop-eu-north-1-799029546890.s3.eu-north-1.amazonaws.com/uploads/1763545586999_image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIA3UCO7J6FPABOULKN%2F20251119%2Feu-north-1%2Fs3%2Faws4_request&X-Amz-Date=20251119T094627Z&X-Amz-Expires=300&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEBIaCmV1LW5vcnRoLTEiRzBFAiEA62%2FowXnY3D%2B%2Fv0OaYDAWk58281tozYRmvB6gpCt9WlECIAxInSPO7%2BWX4k2UDbh8ZTDNAJk%2B9yyQ%2F%2By8lI8rBp47KqcDCNv%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEQABoMNzk5MDI5NTQ2ODkwIgw57z5psP9xMzPGcYUq%2BwKBQQhqVdaue5tcmLhFfCtByjiF2Pws76LuEulE8%2F0l30RMMlFUDTE9LYHmo6eFrKa%2Faxk98%2FTaOJdadCM%2FgQZAI0NupStje%2F%2FdztKv1wkLiMXMmXu%2BnIEBYkTgXJkA%2BoeBPWtpRtEn8xewT8AntYAMyjGzadHAHQsxR7YDYCaljHuPKT0tCcwcvQepduo3cp7EASXEXvv2UywmQiRz4d3WOk0CRQM07uRlj5AxhevFHGCjKc9ACHMxjBWRkftw6%2F9Wg2SWe35sdSpGsQbz07xWyuac%2FDE3fmLhe%2FOKtqfM3rxZ7jx9Nz8pVOhadQnW%2BtWIAlb1YCvvMHBvByD5xnSasxMcbXMK40J7Z7bxhZZjJH4FzVRjVMttWDag68yX%2BA0YF1FeoEe6ZT2yJThYCzqk%2FQqebkADtR09KdhsAXbQDaTkq6BdR0%2BqR5uab7E%2BqpmjE5cP9fce6UbShyUmgKvAud%2B0BxepGmIb1ufDP3933gC%2Bc9KL%2BCr8Ito6MNuj9sgGOp0BcK1fXS3pvnRZ1IoTBf7SlGahzwIdVqVz706ujFbk1RByp49KOpGlIJNcyt%2FcRyR6qvF8RBCvedKBiHRxOPMh16QHrMy%2B%2Bq9P7%2BtbG4HFUXNDVNbtI4NITLdVlUUp%2FyW6xsG3bRGHDN0%2F7oQ3IRoZ61iO34qwzBDC896wD0CgJTrMHqXem%2FMX8C34CC0jczBXQb783fmQ%2BiwCoNBk3Q%3D%3D&X-Amz-Signature=742697ce75d237afc0f9f96718afae9cb4660d66c290705b7bc090392311c766&X-Amz-SignedHeaders=host&x-amz-checksum-crc32=AAAAAA%3D%3D&x-amz-sdk-checksum-algorithm=CRC32&x-id=PutObject",
+					"protocol": "https",
+					"host": [
+						"blogify-media-develop-eu-north-1-799029546890",
+						"s3",
+						"eu-north-1",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"uploads",
+						"1763545586999_image.png"
+					],
+					"query": [
+						{
+							"key": "X-Amz-Algorithm",
+							"value": "AWS4-HMAC-SHA256"
+						},
+						{
+							"key": "X-Amz-Content-Sha256",
+							"value": "UNSIGNED-PAYLOAD"
+						},
+						{
+							"key": "X-Amz-Credential",
+							"value": "ASIA3UCO7J6FPABOULKN%2F20251119%2Feu-north-1%2Fs3%2Faws4_request"
+						},
+						{
+							"key": "X-Amz-Date",
+							"value": "20251119T094627Z"
+						},
+						{
+							"key": "X-Amz-Expires",
+							"value": "300"
+						},
+						{
+							"key": "X-Amz-Security-Token",
+							"value": "IQoJb3JpZ2luX2VjEBIaCmV1LW5vcnRoLTEiRzBFAiEA62%2FowXnY3D%2B%2Fv0OaYDAWk58281tozYRmvB6gpCt9WlECIAxInSPO7%2BWX4k2UDbh8ZTDNAJk%2B9yyQ%2F%2By8lI8rBp47KqcDCNv%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEQABoMNzk5MDI5NTQ2ODkwIgw57z5psP9xMzPGcYUq%2BwKBQQhqVdaue5tcmLhFfCtByjiF2Pws76LuEulE8%2F0l30RMMlFUDTE9LYHmo6eFrKa%2Faxk98%2FTaOJdadCM%2FgQZAI0NupStje%2F%2FdztKv1wkLiMXMmXu%2BnIEBYkTgXJkA%2BoeBPWtpRtEn8xewT8AntYAMyjGzadHAHQsxR7YDYCaljHuPKT0tCcwcvQepduo3cp7EASXEXvv2UywmQiRz4d3WOk0CRQM07uRlj5AxhevFHGCjKc9ACHMxjBWRkftw6%2F9Wg2SWe35sdSpGsQbz07xWyuac%2FDE3fmLhe%2FOKtqfM3rxZ7jx9Nz8pVOhadQnW%2BtWIAlb1YCvvMHBvByD5xnSasxMcbXMK40J7Z7bxhZZjJH4FzVRjVMttWDag68yX%2BA0YF1FeoEe6ZT2yJThYCzqk%2FQqebkADtR09KdhsAXbQDaTkq6BdR0%2BqR5uab7E%2BqpmjE5cP9fce6UbShyUmgKvAud%2B0BxepGmIb1ufDP3933gC%2Bc9KL%2BCr8Ito6MNuj9sgGOp0BcK1fXS3pvnRZ1IoTBf7SlGahzwIdVqVz706ujFbk1RByp49KOpGlIJNcyt%2FcRyR6qvF8RBCvedKBiHRxOPMh16QHrMy%2B%2Bq9P7%2BtbG4HFUXNDVNbtI4NITLdVlUUp%2FyW6xsG3bRGHDN0%2F7oQ3IRoZ61iO34qwzBDC896wD0CgJTrMHqXem%2FMX8C34CC0jczBXQb783fmQ%2BiwCoNBk3Q%3D%3D"
+						},
+						{
+							"key": "X-Amz-Signature",
+							"value": "742697ce75d237afc0f9f96718afae9cb4660d66c290705b7bc090392311c766"
+						},
+						{
+							"key": "X-Amz-SignedHeaders",
+							"value": "host"
+						},
+						{
+							"key": "x-amz-checksum-crc32",
+							"value": "AAAAAA%3D%3D"
+						},
+						{
+							"key": "x-amz-sdk-checksum-algorithm",
+							"value": "CRC32"
+						},
+						{
+							"key": "x-id",
+							"value": "PutObject"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "https://dhmt61wka1.execute-api.eu-north-1.amazonaws.com",
+			"type": "string"
+		},
+		{
+			"key": "jwtToken",
+			"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIyMDgyNDIzMi1mNjc3LTQ0ODUtODBjZS0xOTU4OTU3NDE1M2EiLCJlbWFpbCI6ImJhcHRpc3RlLmNoZXJ1ZWxAZ21haWwuY29tIiwicm9sZSI6ImVkaXRvciIsImlhdCI6MTc2MzU0MTcwNiwiZXhwIjoxNzY0MTQ2NTA2fQ.ZjoOyQQf3IPdVKpn-GDW0NXn24js46DwrSGZIZkNlPY",
+			"type": "string"
+		}
+	]
+}
