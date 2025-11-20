@@ -103,14 +103,23 @@ Ci-dessous, un tableau regroupant les différents endpoints, associés chacun à
 
 | Route            | Méthode | Auth | Description                                       |
 |------------------|---------|------|---------------------------------------------------|
+| `/auth/register` | POST    | Non  | Inscription d’un nouvel utilisateur               |
+| `/auth/login`    | POST    | Non  | Connexion utilisateur et récupération du JWT      |
 | `/posts`         | GET     | Non  | Récupère la liste de tous les posts               |
 | `/posts`         | POST    | JWT  | Crée un nouveau post                              |
 | `/posts/{id}`    | GET     | Non  | Récupère un post par ID                           |
 | `/posts/{id}`    | PUT     | JWT  | Met à jour un post                                |
 | `/posts/{id}`    | DELETE  | JWT  | Supprime un post                                  |
 | `/media/presign` | POST    | JWT  | Génère une URL pré-signée pour upload d’images    |
-| `/auth/register` | POST    | Non  | Inscription d’un nouvel utilisateur               |
-| `/auth/login`    | POST    | Non  | Connexion utilisateur et récupération du JWT      |
+
+Toutes les routes ci-dessus, hormis register et login, nécessitent d'être authentifié.
+
+## Description des rôles
+
+Notre application contient 3 rôles : 
+- Administrateur (admin) qui a les droits sur tous les posts peu importe leur status
+- Éditeur (editor) qui peut créer des posts, voir tous les posts avec le statut "published" et voir ses propres posts "draft"
+- Invité (guest) qui ne peut pas créer de posts et uniquement voir les posts "published"
 
 ## Upload d’images
 
@@ -162,3 +171,14 @@ Exemple :
 }
 
 ```
+
+## Supprimer les ressources associées
+
+Pour supprimer les ressources associées au projet, utilisez la commande : 
+```bash
+serverless remove
+```
+
+Les paramètres --stage et --region sont toujours utilisables, toujours respectivement develop et eu-west-1 par défaut.
+
+Il se peut que la destruction soit annulée si une des ressources n'est pas valide pour, notamment le S3 s'il n'est pas vide. Dans ce genre de cas suivre le message d'erreur et faire manuellement les opérations nécessaires.
