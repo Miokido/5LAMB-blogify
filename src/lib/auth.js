@@ -4,7 +4,6 @@ const { getJwtSecret } = require("./loadSecret");
 const verifyToken = async (token) => {
     if (!token) throw new Error("No token");
     const secret = await getJwtSecret();
-    console.log("[auth] secret length:", secret.length, "sha256:", require('crypto').createHash('sha256').update(secret).digest('hex'));
     return jwt.verify(token, secret);
 };
 

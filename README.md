@@ -64,38 +64,59 @@ Voici ci-dessous un diagramme résumant l'architecture du projet :
 
 ```mermaid
 flowchart LR
-    subgraph User["User"]
-        U["Utilisateur / Client"]
-    end
-    subgraph API["API"]
-        Auth["Lambda Auth JWT"]
-        CP["Lambda createPost"]
-        LP["Lambda listPosts"]
-        GP["Lambda getPost"]
-        UP["Lambda updatePost"]
-        DP["Lambda deletePost"]
-        GPUT["Lambda generatePresignedUrl"]
-        RU["Lambda registerUser"]
-        LU["Lambda loginUser"]
-    end
-    subgraph DB["DB"]
-        POSTS["PostsTable DynamoDB"]
-        USERS["UsersTable DynamoDB"]
-    end
-    subgraph Storage["Storage"]
-        MEDIA["S3 Bucket Media"]
-    end
-    U -- Requêtes --> API
-    API -- Vérification JWT --> Auth
-    API --> CP & LP & GP & UP & DP & GPUT & RU & LU
-    CP --> POSTS
-    LP --> POSTS
-    GP --> POSTS
-    UP --> POSTS
-    DP --> POSTS
-    RU --> USERS
-    LU --> USERS
-    GPUT --> MEDIA
+  subgraph User["User"]
+    U["Utilisateur / Client"]
+  end
+
+  subgraph API["API (AWS Lambda + API Gateway)"]
+    Auth["Lambda Auth JWT"]
+    CP["Lambda createPost"]
+    LP["Lambda listPosts"]
+    GP["Lambda getPost"]
+    UP["Lambda updatePost"]
+    DP["Lambda deletePost"]
+    GPUT["Lambda generatePresignedUrl"]
+    RU["Lambda registerUser"]
+    LU["Lambda loginUser"]
+  end
+
+  subgraph DB["Database"]
+    POSTS["PostsTable DynamoDB"]
+    USERS["UsersTable DynamoDB"]
+  end
+
+  subgraph Storage["Storage"]
+    MEDIA["S3 Bucket Media"]
+  end
+
+  subgraph Secrets["Secrets Manager"]
+    JWTSEC["Secret: JWT Secret"]
+  end
+
+%% User → API
+  U -- Requêtes --> API
+
+%% API routes
+  API --> CP & LP & GP & UP & DP & GPUT & RU & LU
+
+%% JWT Verification
+  API -- Vérification JWT --> Auth
+
+%% DB interactions
+  CP --> POSTS
+  LP --> POSTS
+  GP --> POSTS
+  UP --> POSTS
+  DP --> POSTS
+  RU --> USERS
+  LU --> USERS
+
+%% S3 Uploads
+  GPUT --> MEDIA
+
+%% Secrets Manager usage
+  Auth -- Lecture du secret --> JWTSEC
+  LU -- Lecture du secret --> JWTSEC
 ```
 
 ## API Endpoints
